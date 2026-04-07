@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: #0e0e0f;
+    color: #cdd6f4;
+    font-family: 'Inter', sans-serif;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+  .pb-safe {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { border-left-color: #ffffff; }
+  50% { border-left-color: transparent; }
+}
+
+.char-cursor {
+  border-left: 2px solid #ffffff;
+  margin-left: -1px;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.char-untouched {
+  color: #555566;
+}
+
+.char-correct {
+  color: #e2b714;
+}
+
+.char-error {
+  color: #ca4754;
+  text-decoration: underline;
+  text-decoration-color: #ca4754;
+}
+
+.timer-danger {
+  color: #ca4754;
+  animation: pulse-danger 0.8s ease-in-out infinite;
+}
+
+@keyframes pulse-danger {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+
+.mode-pill {
+  transition: all 0.15s ease;
+  min-height: 48px;
+}
+
+.mode-pill.active {
+  background-color: #e2b714;
+  color: #0e0e0f;
+}
+
+.mode-pill:not(.active) {
+  background-color: #1e1e22;
+  color: #555566;
+}
+
+/* Prompt display */
+.prompt-lines {
+  overflow: hidden;
+  position: relative;
+  cursor: text;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.prompt-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-all;
+  transition: opacity 0.2s ease;
+}
+
+/* Invisible textarea overlay */
+.input-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: text;
+  font-size: 16px; /* prevents iOS zoom */
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+}
+
+/* Scrollbar hide */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+/* WPM count-up animation */
+@keyframes wpm-enter {
+  from { opacity: 0; transform: translateY(16px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wpm-animate {
+  animation: wpm-enter 0.4s ease-out forwards;
+}
+
+/* Gold banner */
+.gold-banner {
+  background: linear-gradient(135deg, #e2b714, #f5c842);
+  color: #0e0e0f;
+  font-weight: 700;
+  border-radius: 12px;
+  text-align: center;
+  padding: 12px 20px;
+  animation: wpm-enter 0.4s ease-out 0.8s both;
+}
