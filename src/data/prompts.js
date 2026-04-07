@@ -6,7 +6,7 @@ export const prompts = [
   "ngl this might be the best thing ive ever seen",
   "wait wait wait you have to come over rn",
   "ok i am fully freaking out rn not ok",
-  "bro i just found out and im literally shaking lmao",
+  "bro i just found out and im lit shaking lmao",
   "this is so unhinged i love it",
   "yooo are u seeing this rn",
   "no bc why is this so funny im crying",
@@ -17,7 +17,7 @@ export const prompts = [
   "bro when i tell u i screamed",
 
   // CONFUSED
-  "wait what do u mean?? explain",
+  "wait wdym?? pls explain lol",
   "nvm i figured it out lol",
   "ok so i did a thing and idk how to feel",
   "bro what is even happening rn",
@@ -34,8 +34,8 @@ export const prompts = [
   "bro i have been staring at this for 10 mins",
 
   // MAKING PLANS
-  "ok so what's the move tonight",
-  "are u actually coming or are u gonna flake again lol",
+  "ok so wtm tonight",
+  "r u actually coming or are u gonna fade again lol",
   "nah bro we HAVE to go this weekend",
   "ok if we leave by 9 we should be fine",
   "wait who else is coming",
@@ -49,6 +49,7 @@ export const prompts = [
   "wait r u actually free or are u just saying that",
   "dude just say ur not coming it's ok lmao",
   "ok so change of plans here's what's happening",
+  "pu to ur crib is ode let's just go to mine",
 
   // DRAMA
   "wait he actually said that?? no way",
@@ -57,10 +58,11 @@ export const prompts = [
   "bro i KNEW something was off",
   "ok so basically she posted that and then deleted it",
   "wait why didn't anyone tell me this sooner",
-  "lmaooo he really said that with his whole chest",
+  "lmaooo he really said that bruh",
   "not me finding out like this",
   "ok i'm not saying anything but i'm saying something",
-  "bro the audacity is actually crazy",
+  "bro the audacity is crazy",
+  "nah he's being so ode rn",
   "wait so they were talking the whole time??",
   "nah i would have said something immediately lol",
   "ok this is actually so messy i love it",
