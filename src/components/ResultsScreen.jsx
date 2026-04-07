@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useHighScores } from '../hooks/useHighScores'
+import SubmitScore from './SubmitScore'
 
 function getReaction(wpm) {
   if (wpm < 20) return { emoji: '🐢', text: 'ur getting there' }
@@ -133,6 +134,12 @@ export default function ResultsScreen() {
             </span>
           </div>
         ))}
+      </div>
+
+      {/* Submit to leaderboard */}
+      <div className="mb-6">
+        <p className="text-xs mb-2" style={{ color: '#3a3a4a' }}>submit to leaderboard</p>
+        <SubmitScore wpm={wpm} accuracy={accuracy} mode={mode} />
       </div>
 
       {/* Buttons */}

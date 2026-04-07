@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ModeSelector from './ModeSelector'
 import { useHighScores } from '../hooks/useHighScores'
+import LeaderboardModal from './LeaderboardModal'
 
 export default function HomeScreen() {
   const navigate = useNavigate()
   const [mode, setMode] = useState(30)
   const [showScores, setShowScores] = useState(false)
+  const [showLeaderboard, setShowLeaderboard] = useState(false)
   const { getScores } = useHighScores()
   const scores = getScores()
 
@@ -50,8 +52,15 @@ export default function HomeScreen() {
         start
       </button>
 
-      {/* Best scores */}
-      <div className="mb-2">
+      {/* Links row */}
+      <div className="flex gap-6 mb-2">
+        <button
+          onClick={() => setShowLeaderboard(true)}
+          className="text-sm transition-colors"
+          style={{ color: '#3a3a4a', minHeight: '44px' }}
+        >
+          leaderboard
+        </button>
         <button
           onClick={() => setShowScores(true)}
           className="text-sm transition-colors"
@@ -63,6 +72,8 @@ export default function HomeScreen() {
 
       {/* Bottom spacer */}
       <div className="flex-1" />
+
+      {showLeaderboard && <LeaderboardModal onClose={() => setShowLeaderboard(false)} />}
 
       {/* High scores modal */}
       {showScores && (
