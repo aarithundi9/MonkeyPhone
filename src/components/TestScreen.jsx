@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTypingTest } from '../hooks/useTypingTest'
 import CharDisplay from './CharDisplay'
@@ -11,6 +11,7 @@ export default function TestScreen() {
   const initialPrompt = location.state?.prompt ?? null
   const textareaRef = useRef(null)
   const handledByKeydownRef = useRef(false)
+  const [started, setStarted] = useState(false)
 
   const {
     chars,
@@ -24,12 +25,10 @@ export default function TestScreen() {
     handleKeyInput,
   } = useTypingTest(mode, initialPrompt)
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      textareaRef.current?.focus()
-    }, 150)
-    return () => clearTimeout(timeout)
-  }, [])
+  function handleTapToStart() {
+    setStarted(true)
+    textareaRef.current?.focus()
+  }
 
   useEffect(() => {
     if (isFinished) {
@@ -102,6 +101,24 @@ export default function TestScreen() {
           <span className="text-xs ml-1.5" style={{ color: '#3a3a4a' }}>acc</span>
         </div>
       </div>
+
+      {/* Tap to start overlay */}
+      {!started && (
+        <div
+          className="fixed inset-0 z-10 flex flex-col items-center justify-center gap-3"
+          style={{ backgroundColor: '#0e0e0f' }}
+          onPointerDown={handleTapToStart}
+        >
+          <span style={{ fontSize: '32px' }}>⌨️</span>
+          <p
+            className="text-base font-medium"
+            style={{ color: '#e2b714', fontFamily: 'JetBrains Mono, monospace' }}
+          >
+            tap to start
+          </p>
+          <p className="text-sm" style={{ color: '#3a3a4a' }}>keyboard will open automatically</p>
+        </div>
+      )}
 
       {/* Typing area — push toward top, not vertically centered */}
       <div
