@@ -68,7 +68,7 @@ export function useTypingTest(mode, initialPrompt = null) {
 
     if (key === 'Backspace') {
       const ci = currentIndexRef.current
-      if (ci === 0) return
+      if (ci === 0) return null
 
       const c = charsRef.current
       // Find start of current word (can't go back past it)
@@ -94,10 +94,10 @@ export function useTypingTest(mode, initialPrompt = null) {
       })
       currentIndexRef.current = ci - 1
       setCurrentIndex(ci - 1)
-      return
+      return null
     }
 
-    if (key.length !== 1) return
+    if (key.length !== 1) return null
 
     if (!isRunningRef.current) {
       startTimer()
@@ -147,6 +147,8 @@ export function useTypingTest(mode, initialPrompt = null) {
       currentIndexRef.current = nextIndex
       setCurrentIndex(nextIndex)
     }
+
+    return isCorrect
   }, [])
 
   const resetWithText = useCallback((text) => {

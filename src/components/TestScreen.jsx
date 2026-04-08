@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useTypingTest } from '../hooks/useTypingTest'
 import CharDisplay from './CharDisplay'
 import Timer from './Timer'
+import { useSound } from '../hooks/useSound'
 
 export default function TestScreen() {
   const navigate = useNavigate()
@@ -12,6 +13,7 @@ export default function TestScreen() {
   const textareaRef = useRef(null)
   const handledByKeydownRef = useRef(false)
   const [started, setStarted] = useState(false)
+  const { playClick, playError } = useSound()
 
   const {
     chars,
@@ -20,7 +22,6 @@ export default function TestScreen() {
     isFinished,
     wpm,
     accuracy,
-    promptText,
     finalStats,
     handleKeyInput,
   } = useTypingTest(mode, initialPrompt)
@@ -60,11 +61,14 @@ export default function TestScreen() {
       return
     }
     const data = e.nativeEvent.data
+    let correct = null
     if (data && data.length === 1) {
-      handleKeyInput(data)
+      correct = handleKeyInput(data)
     } else if (ta.value.length > 0) {
-      handleKeyInput(ta.value[ta.value.length - 1])
+      correct = handleKeyInput(ta.value[ta.value.length - 1])
     }
+    if (correct === true) playClick()
+    else if (correct === false) playError()
     ta.value = ''
     handledByKeydownRef.current = false
   }
