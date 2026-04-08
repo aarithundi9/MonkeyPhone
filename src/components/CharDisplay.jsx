@@ -34,12 +34,14 @@ export default function CharDisplay({ chars, currentIndex }) {
     const cursor = cursorRef.current
     if (!container || !cursor) return
 
-    container.scrollTop = 0
+    // Compute absolute position of cursor within the scrollable content
+    // without resetting scroll (avoids flash)
     const containerRect = container.getBoundingClientRect()
     const cursorRect = cursor.getBoundingClientRect()
-    const naturalTop = cursorRect.top - containerRect.top
+    const absoluteTop = container.scrollTop + (cursorRect.top - containerRect.top)
+    const target = Math.max(0, absoluteTop - LINE_HEIGHT * 0.1)
 
-    container.scrollTop = Math.max(0, naturalTop - LINE_HEIGHT * 0.1)
+    container.scrollTo({ top: target, behavior: 'smooth' })
   }, [currentIndex])
 
   const tokens = tokenize(chars)
